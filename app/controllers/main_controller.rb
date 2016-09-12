@@ -1,8 +1,7 @@
-require_dependency "rails-dribbble-oauth/application_controller"
-
 module RailsDribbbleOauth
-  class DribbbleOauthController < ApplicationController
+  class MainController < RailsDribbbleOauth::ApplicationController
     def make_oauth_request
+      binding.pry
       # redirect to https://dribbble.com/oauth/authorize
       dribbble = "https://dribbble.com/oauth/authorize"
 
@@ -16,6 +15,7 @@ module RailsDribbbleOauth
     end
 
     def passthru
+      binding.pry
       # get back the code to make next API call
       params = {
         "client_id" => ENV["DRIBBBLE_CLIENT_ID"],

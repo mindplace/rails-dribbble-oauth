@@ -1,20 +1,23 @@
-$:.push File.expand_path("../lib", __FILE__)
-
-# Maintain your gem's version:
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "rails-dribbble-oauth/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = "rails-dribbble-oauth"
-  s.version     = Rails::Dribbble::Oauth::VERSION
+  s.version     = RailsDribbbleOauth::VERSION
   s.authors     = ["Esther Leytush"]
   s.email       = ["eleytush@gmail.com"]
   s.summary     = "A Ruby wrapper for authenticating users through Dribbble, with minimal dependencies."
   s.homepage    = "https://github.com/mindplace/rails-dribbble-oauth"
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.required_ruby_version     = '>= 2.1.0'
+  s.required_rubygems_version = '>= 1.8.11'
 
-  s.add_dependency "rails", "~> 5.0.0", ">= 5.0.0.1"
+  s.files = Dir["{app,config,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
+  s.add_dependency 'rails', ['>= 4.0', '< 6']
+  s.add_dependency 'pry'
+  s.add_development_dependency 'bundler', '~> 1.0'
 end
