@@ -1,7 +1,3 @@
-module Rails
-  module Dribbble
-    module Oauth
-      VERSION = '0.0.5'
-    end
-  end
+module RailsDribbbleOauth
+  VERSION = '0.0.5'
 end
