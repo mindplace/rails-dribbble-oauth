@@ -50,7 +50,7 @@ module RailsDribbbleOauth
         data[:user_data] = JSON.parse(response)
       end
 
-      redirect_to return_user_dribbble_info_path(data)
+      redirect_to user_create_from_dribbble_path(data)
     end
   end
 end
