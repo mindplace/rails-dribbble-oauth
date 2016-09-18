@@ -1,12 +1,10 @@
 class MainController < ::ApplicationController
-  attr_accessor :connect_user_id
+  include RailsDribbbleOauth
 
   def oauth_request
-    # temporarily save user ID of requesting user: on passthru method, need to pass
-    # back to user_controller the info for this specific user.
-    @connect_user_id = request.env["QUERY_STRING"].split("=").last.to_i
+    # sets current dribbble user session, cleared on callback
+    session[:current_dribbble_user] = request.env["QUERY_STRING"].split("=").last.to_i
 
-    binding.pry
     # redirect to https://dribbble.com/oauth/authorize
     dribbble = "https://dribbble.com/oauth/authorize"
 
@@ -19,8 +17,7 @@ class MainController < ::ApplicationController
     redirect_to "#{dribbble}?#{params.to_query}"
   end
 
-  def passthru
-    binding.pry
+  def callback
     # get back the code to make next API call
     params = {
       "client_id" => ENV["DRIBBBLE_CLIENT_ID"],
@@ -44,7 +41,7 @@ class MainController < ::ApplicationController
       success: true,
       status: "200 OK",
       message: nil,
-      user_id: connect_user_id,
+      user_id: current_dribbble_user,
       user_data: nil
     }
 
@@ -56,6 +53,7 @@ class MainController < ::ApplicationController
       data[:user_data] = JSON.parse(response)
     end
 
-    redirect_to create_from_dribbble_path(data)
+    clear_dribbble_user
+    redirect_to dribbble_info_path(data)
   end
 end

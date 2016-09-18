@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-    get 'request',      to: 'main#oauth_request',  as: "dribbble_oauth_request"
-    get 'callback',     to: 'main#passthru',       as: "dribbble_callback"
-    get 'information',  to: 'users#create',        as: "create_from_dribbble"
+    get 'dribbble/request',      to: 'main#oauth_request',  as: "dribbble_request"
+    get 'dribbble/callback',     to: 'main#callback',       as: "dribbble_callback"
+    get 'dribbble/information',  to: 'users#add_dribbble_info',        as: "dribbble_information"
 end
