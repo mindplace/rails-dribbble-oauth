@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = RailsDribbbleOauth::VERSION
   s.authors     = ["Esther Leytush"]
   s.email       = ["eleytush@gmail.com"]
-  s.summary     = "A Ruby wrapper for authenticating users through Dribbble, with minimal dependencies."
+  s.summary     = "A Rails engine gem for authenticating users through Dribbble, with no dependencies."
   s.homepage    = "https://github.com/mindplace/rails-dribbble-oauth"
   s.license     = "MIT"
 
