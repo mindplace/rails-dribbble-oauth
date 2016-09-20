@@ -1,4 +1,4 @@
-require "rails_dribbble_oauth/engine"
+require "rails-dribbble-oauth/engine"
 
 module RailsDribbbleOauth
   def current_dribbble_user

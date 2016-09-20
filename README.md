@@ -32,7 +32,7 @@ To get started, register your application with Dribbble.
 
 ![callback screenshot](screenshots/callback_screenshot.png)
 
-As soon as your application is registered, you will see your `Client ID`, `Client Secret`, and `Client Access Token`. Copy the `Client ID` and `Client Secret` values: you'll need to echo those into your application's runtime environment in order to use the gem.
+As soon as your application is registered, you will see your `Client ID`, `Client Secret`, and `Client Access Token` below on the same page. Copy the `Client ID` and `Client Secret` values: you'll need to echo those into your application's runtime environment in order to use the gem.
 
 ### Echo environment variables from Dribbble
 Navigate to your application's environment shell. Run the following commands:
@@ -42,13 +42,15 @@ export DRIBBBLE_CLIENT_ID="[your application's Client ID]"
 export DRIBBBLE_CLIENT_SECRET="[your application's Client Secret]"
 ```
 
-Note: these environment variables must be named in this exact format.
+Note: these environment variables must be named in this specific format.
 
 ### Build links in your root application
-You're now ready to build links in your root application. Navigate to the views where you wish to authenticate users via Dribbble and build your links using the `dribbble_oauth_request_path` and passing it a user_id parameter:
+You're now ready to build links in your root application. Navigate to the appropriate views and build your links using the `dribbble_oauth_request_path`, passing it a user_id parameter:
 ```
 <%= link_to "Dribbble authentication request", dribbble_oauth_request_path(user_id: @user.id) %>
 ```
+
+If your requesting user does not have an ID yet--such as if you want to authorize/authenticate users via Dribbble--this service will still work if it gets a `nil` value for `user_id`. 
 
 ### Get back user information from Dribbble
 Add this line to your `ApplicationController`:

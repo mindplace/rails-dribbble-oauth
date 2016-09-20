@@ -1,5 +1,5 @@
 $:.push File.expand_path("../lib", __FILE__)
-require "rails_dribbble_oauth/version"
+require "rails-dribbble-oauth/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
@@ -14,9 +14,14 @@ Gem::Specification.new do |s|
   s.required_ruby_version     = '>= 2.1.0'
   s.required_rubygems_version = '>= 1.8.11'
 
-  s.files = Dir["{app,config,lib,screenshots}/**/*", "MIT-LICENSE", "README.md"]
+  s.files      = Dir["{app,config,lib,screenshots}/**/*", "MIT-LICENSE", "README.md"]
+  s.test_files = Dir["spec/**/*"]
 
   s.add_dependency 'rails', ['>= 4.0', '< 6']
   s.add_dependency 'pry'
+
   s.add_development_dependency 'bundler', '~> 1.0'
+  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'capybara'
+  s.add_development_dependency 'factory_girl_rails'
 end
