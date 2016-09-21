@@ -40,6 +40,8 @@ describe MainController do
 
   end
 
+  # These are being tested here because they are triggered by MainController methods
+
   describe "current_dribbble_user" do
     include RailsDribbbleOauth
 
