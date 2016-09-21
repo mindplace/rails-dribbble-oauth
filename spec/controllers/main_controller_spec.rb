@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe MainController do
+
   describe "GET #oauth_request" do
     it "sets the correct session[:current_dribbble_user] if an id is passed" do
       get :oauth_request, { id: 10 }
@@ -37,5 +38,43 @@ describe MainController do
     it "calls clear_dribbble_user"
     it "redirects to dribble_info_path with user information"
 
+  end
+
+  describe "current_dribbble_user" do
+    include RailsDribbbleOauth
+
+    it "returns id corresponding to user in database if user was present when main#oauth_request was called" do
+      user = User.create(email: "test@test.com", password: "password", first_name: "test_first", last_name: "test_last")
+
+      get :oauth_request, { id: user.id }
+      expect(current_dribbble_user.id).to eq(user.id)
+    end
+
+    it "returns nil if there is no current_dribbble_user" do
+      user = User.create(email: "test@test.com", password: "password", first_name: "test_first", last_name: "test_last")
+
+      get :oauth_request
+      expect{ current_dribbble_user.id }.to raise_error(NoMethodError)
+    end
+  end
+
+  describe "clear_dribbble_user" do
+    include RailsDribbbleOauth
+
+    it "returns nil when called" do
+      user = User.create(email: "test@test.com", password: "password", first_name: "test_first", last_name: "test_last")
+
+      get :oauth_request, { id: user.id }
+      clear_dribbble_user
+      expect{ current_dribbble_user.id }.to raise_error(NoMethodError)
+    end
+
+    it "sets session[:current_dribbble_user] to nil" do
+      user = User.create(email: "test@test.com", password: "password", first_name: "test_first", last_name: "test_last")
+
+      get :oauth_request, { id: user.id }
+      clear_dribbble_user
+      expect(session[:current_dribbble_user]).to eq(nil)
+    end
   end
 end
