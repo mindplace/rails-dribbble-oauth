@@ -33,8 +33,6 @@ class MainController < ::ApplicationController
     request = Net::HTTP.post_form(uri, params)
     token = JSON.parse(request.response.body)["access_token"]
 
-    binding.pry
-    
     # use access token to get access to the API
     params = {"access_token" => token}
     uri = URI.parse("https://api.dribbble.com/v1/user")
@@ -49,11 +47,10 @@ class MainController < ::ApplicationController
       user_data: nil
     }
 
-    binding.pry
-
     response = JSON.parse(response)
 
-    if response["message"] == "Bad Credentials"
+    if request.code != "200"
+      # if there was some sort of failure
       data[:success] = false
       data[:status] = "204 No Content"
       data[:message] = "No user data returned from Dribbble. Reason provided by Dribbble: '#{response["message"]}'"

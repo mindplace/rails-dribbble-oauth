@@ -26,13 +26,13 @@ $ gem install rails-dribbble-oauth
 
 To get started, register your application with Dribbble.
 * Make a user account if you do not already have one.
-* Navigate to  [dribbble.com/account/applications](https://dribbble.com/account/applications) to create your application's account.
+* Navigate to [dribbble.com/account/applications](https://dribbble.com/account/applications) to create your application's account.
 * On the bottom of the page, click [Register a new application](https://dribbble.com/account/applications/new).
-* Edit the `Website URL` and `Callback URL` portions. Include the `callback` route defined by the gem. This means your callback URL will be `http://[your root application URL]/dribbble/callback`:
+* Edit the **Website URL** and **Callback URL** portions. Include the **callback** route defined by the gem. This means your callback URL will be `http://[your root application URL]/dribbble/callback`:
 
 ![callback screenshot](screenshots/callback_screenshot.png)
 
-As soon as your application is registered, you will see your `Client ID`, `Client Secret`, and `Client Access Token` below on the same page. Copy the `Client ID` and `Client Secret` values: you'll need to echo those into your application's runtime environment in order to use the gem.
+As soon as your application is registered, you will see your **Client ID**, **Client Secret**, and **Client Access Token** below on the same page. Copy the **Client ID** and **Client Secret** values: you'll need to echo those into your application's runtime environment in order to use the gem.
 
 ### Echo environment variables from Dribbble
 Navigate to your application's environment shell. Run the following commands:
@@ -74,7 +74,7 @@ Setup a new action in your `UserController`: `add_dribbble_info`. This action wi
 ```ruby
 { "status"=>"200 OK",
   "success"=>"true",
-  "user_id"=>"1",
+  "user_id"=>"1", # this is nil in the case of there not being a main app user registered initially
   "user_data"=>{
     "avatar_url"=>"https://d13yacurqjgara.cloudfront.net/assets/avatar-default-aa2eab7684294781f93bc99ad394a0eb3249c5768c21390163c9f55ea8ef83a4.gif",
     "bio"=>"",
