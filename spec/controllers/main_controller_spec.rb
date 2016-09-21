@@ -1,43 +1,41 @@
 require 'rails_helper'
 
-# describe GamesController do
-#   let!(:game) { Game.create!(user_throw: Game::THROWS.sample) }
-#
-#   describe "GET #index" do
-#     it "assigns all games as @games" do
-#       get :index
-#       expect(assigns(:games)).to eq(Game.all)
-#     end
-#   end
-#
-#   describe "POST #create" do
-#     context "when valid params are passed" do
-#       before :each do
-#         post :create, { game: { user_throw: "rock" } }
-#       end
-#
-#       it "creates a new Game" do
-#         expect {
-#           post :create, { game: { user_throw: "rock" } }
-#         }.to change(Game, :count).by(1)
-#       end
-#
-#       it "assigns a newly created game as @game" do
-#         expect(assigns(:game)).to be_an_instance_of(Game)
-#       end
-#
-#       it "redirects to the created game" do
-#         new_game = assigns(:game)
-#         expect(subject).to redirect_to(game_path(new_game))
-#       end
-#     end
-#   end
-# end
-
 describe MainController do
   describe "GET #oauth_request" do
-    it "redirects to Dribbble.com with params" do
-      expect(response).to redirect_to("dribbble.com")
+    it "sets the correct session[:current_dribbble_user] if an id is passed" do
+      get :oauth_request, { id: 10 }
+      expect(request.session[:current_dribbble_user]).to eq(10)
     end
+
+    it "sets session[:current_dribbble_user] to nil if an id is not passed" do
+      get :oauth_request
+      expect(request.session[:current_dribbble_user]).to eq(nil)
+    end
+
+    it "redirects user to Dribbble.com with correct params" do
+      if !ENV["DRIBBBLE_CLIENT_ID"]
+        ENV["DRIBBBLE_CLIENT_ID"] = "1"
+      end
+      get :oauth_request
+      expect(response).to redirect_to("https://dribbble.com/oauth/authorize?client_id=#{ENV["DRIBBBLE_CLIENT_ID"]}")
+    end
+  end
+
+  describe "GET #callback" do
+    # these tests will fail if environment variables aren't echoed
+
+    # TODO: I have no idea how to build these tests to dynamically make the #oauth_request call each time yet trigger the #callback method myself
+
+    # before :each do
+    #   get :callback, { code: "c019cc67fc53a58419ce1180669de2c7c10c9013ce808e0641fa3defd88b59f8"} # code example
+    # end
+
+    it "makes a call to API get access token"
+    it "uses access token to get access to main API"
+    it "prepares user information with user_id if main app already has this user registered"
+    it "prepares user information with user_id = nil if main app does not have this user registered"
+    it "calls clear_dribbble_user"
+    it "redirects to dribble_info_path with user information"
+
   end
 end

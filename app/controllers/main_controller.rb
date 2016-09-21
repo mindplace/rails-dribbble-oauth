@@ -3,7 +3,9 @@ class MainController < ::ApplicationController
 
   def oauth_request
     # sets current dribbble user session, cleared on callback
-    session[:current_dribbble_user] = request.env["QUERY_STRING"].split("=").last.to_i
+    # does not rely on main app to set a current_user
+    id = request.env["QUERY_STRING"].split("=").last.to_i
+    session[:current_dribbble_user] = id > 0 ? id : nil
 
     # redirect to https://dribbble.com/oauth/authorize
     dribbble = "https://dribbble.com/oauth/authorize"
@@ -31,6 +33,8 @@ class MainController < ::ApplicationController
     request = Net::HTTP.post_form(uri, params)
     token = JSON.parse(request.response.body)["access_token"]
 
+    binding.pry
+    
     # use access token to get access to the API
     params = {"access_token" => token}
     uri = URI.parse("https://api.dribbble.com/v1/user")
@@ -45,15 +49,19 @@ class MainController < ::ApplicationController
       user_data: nil
     }
 
-    if response.blank?
+    binding.pry
+
+    response = JSON.parse(response)
+
+    if response["message"] == "Bad Credentials"
       data[:success] = false
       data[:status] = "204 No Content"
-      data[:message] = "No user data returned from Dribbble."
+      data[:message] = "No user data returned from Dribbble. Reason provided by Dribbble: '#{response["message"]}'"
     else
-      data[:user_data] = JSON.parse(response)
+      data[:user_data] = response
     end
 
     clear_dribbble_user
-    redirect_to dribbble_info_path(data)
+    redirect_to dribbble_information_path(data)
   end
 end
