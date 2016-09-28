@@ -31,6 +31,8 @@ describe MainController do
     #   get :callback, { code: "c019cc67fc53a58419ce1180669de2c7c10c9013ce808e0641fa3defd88b59f8"} # code example
     # end
 
+    # Try this: https://github.com/vcr/vcr
+
     it "makes a call to API get access token"
     it "uses access token to get access to main API"
     it "prepares user information with user_id if main app already has this user registered"
