@@ -12,13 +12,9 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version     = '>= 2.2.5'
   s.required_rubygems_version = '>= 2.6.0'
-
-  # s.files = Dir["{app,bin,config,lib,screenshots}/**/*", "MIT-LICENSE", "README.md"]
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- spec/*`.split("\n")
-  s.require_paths = ["lib"]
-
   s.add_runtime_dependency 'rails', ['>= 4.0', '< 6']
+
+  s.files = Dir["{app,bin,config,lib,screenshots}/**/*", "MIT-LICENSE", "README.md"]
 
   # Production and testing:
   s.add_development_dependency 'pry', '~> 0.10.4'
@@ -26,5 +22,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec-rails', '~> 3.5.2'
   s.add_development_dependency 'capybara', '~> 2.7.1'
   s.add_development_dependency 'factory_girl_rails', '~> 4.4.1'
-
 end
