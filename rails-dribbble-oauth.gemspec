@@ -1,4 +1,4 @@
-$:.push File.expand_path("../lib/rails-dribbble-oauth/version", __FILE__)
+$:.push File.expand_path("../lib", __FILE__)
 require "rails-dribbble-oauth/version"
 
 Gem::Specification.new do |s|

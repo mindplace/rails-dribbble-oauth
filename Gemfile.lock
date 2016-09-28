@@ -151,12 +151,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.0)
-  capybara (~> 2.7.1)
-  factory_girl_rails (~> 4.4.1)
-  pry (~> 0.10.4)
+  bundler (>= 1.0)
+  capybara (>= 2.7.1)
+  factory_girl_rails (>= 4.4.1)
+  pry (>= 0.10.4)
   rails-dribbble-oauth!
-  rspec-rails (~> 3.5.2)
+  rspec-rails (>= 3.5.2)
 
 BUNDLED WITH
    1.13.1
