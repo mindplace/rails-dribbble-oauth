@@ -16,7 +16,9 @@ Gem::Specification.new do |s|
 
   # s.files = Dir["{app,bin,config,lib,screenshots}/**/*", "MIT-LICENSE", "README.md"]
   s.files = `git ls-files`.split("\n")
-  s.add_dependency 'rails', ['>= 4.0', '< 6']
+  s.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.require_paths = ["app", "config", "screenshots", "lib"]
+  s.add_runtime_dependency 'rails', ['>= 4.0', '< 6']
 
   # Production and testing:
   s.add_development_dependency 'pry', '~> 0'
