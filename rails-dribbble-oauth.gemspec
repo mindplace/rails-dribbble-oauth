@@ -15,7 +15,8 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = '>= 2.6.0'
   s.add_runtime_dependency 'rails', ['>= 4.0', '< 6']
 
-  s.files = Dir["{app,bin,config,lib,screenshots}/**/*", "MIT-LICENSE", "README.md"]
+  # s.files = Dir["{app,bin,config,lib,screenshots}/**/*", "MIT-LICENSE", "README.md"]
+  s.files = `git ls-files`.split("\n")
 
   # Production and testing:
   s.add_development_dependency 'pry', '>= 0.10.4'
