@@ -11,17 +11,15 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/mindplace/rails-dribbble-oauth"
   s.license     = "MIT"
 
-  s.required_ruby_version     = '>= 2.2.5'
-  s.required_rubygems_version = '>= 2.6.0'
-  s.add_runtime_dependency 'rails', ['>= 4.0', '< 6']
+  s.add_dependency "rails", "~> 4.0", "< 6"
 
   # s.files = Dir["{app,bin,config,lib,screenshots}/**/*", "MIT-LICENSE", "README.md"]
   s.files = `git ls-files`.split("\n")
 
   # Production and testing:
-  s.add_development_dependency 'pry', '>= 0.10.4'
-  s.add_development_dependency 'bundler', '>= 1.0'
-  s.add_development_dependency 'rspec-rails', '>= 3.5.2'
-  s.add_development_dependency 'capybara', '>= 2.7.1'
-  s.add_development_dependency 'factory_girl_rails', '>= 4.4.1'
+  s.add_development_dependency 'pry', ['>= 0.10.4', '< 2.0']
+  s.add_development_dependency 'bundler', ['>= 1.0', '< 2.0']
+  s.add_development_dependency 'rspec-rails', ['>= 3.5', '< 4.0']
+  s.add_development_dependency 'capybara', ['>= 2.7', '< 3.0']
+  s.add_development_dependency 'factory_girl_rails', ['>= 4.4', '< 6.0']
 end
