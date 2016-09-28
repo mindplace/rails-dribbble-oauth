@@ -13,7 +13,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 4.0", "< 6"
 
-  # s.files = Dir["{app,bin,config,lib,screenshots}/**/*", "MIT-LICENSE", "README.md"]
   s.files = `git ls-files`.split("\n")
 
   # Production and testing:

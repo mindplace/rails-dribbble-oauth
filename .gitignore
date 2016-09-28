@@ -2,3 +2,5 @@
 log/*.log
 pkg/
 spec/test-app
+Gemfile.lock
+autobahn
