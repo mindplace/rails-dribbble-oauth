@@ -14,15 +14,15 @@ Gem::Specification.new do |s|
   s.required_ruby_version     = '>= 2.1.0'
   s.required_rubygems_version = '>= 1.8.11'
 
-  s.files = Dir["{app,bin,config,lib,screenshots}/**/*", "MIT-LICENSE", "README.md"]
+  # s.files = Dir["{app,bin,config,lib,screenshots}/**/*", "MIT-LICENSE", "README.md"]
+  s.files = `git ls-files`.split("\n")
   s.add_dependency 'rails', ['>= 4.0', '< 6']
 
   # Production and testing:
   s.add_development_dependency 'pry', '~> 0'
   s.add_development_dependency 'bundler', '~> 1.0'
-  s.add_development_dependency 'rspec-rails', '~> 0'
+  s.add_development_dependency 'rspec-rails', '~> 3.5.2'
   s.add_development_dependency 'capybara', '~> 0'
-  s.add_development_dependency 'factory_girl_rails', '~> 0'
+  s.add_development_dependency 'factory_girl_rails', '~> 4.4.1'
 
-  s.test_files = Dir["spec/**/*"]
 end
