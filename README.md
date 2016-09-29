@@ -61,7 +61,46 @@ include RailsDribbbleOauth
 
 Setup a new action in your `UserController`: `add_dribbble_info`. This action will be triggered once the Dribbble oauth request returns with information about the requesting user.
 
-#### Program flow:
+```ruby
+# Sample add_dribbble_info method:
+
+class UsersController < ApplicationController
+  def add_dribbble_info
+    if params[:success] != "true"
+      # data has failed to return for some reason
+      # write to the console to log this issue
+      write_to_log("Dribbble call failed. Info: '#{params[:message]}'")
+      flash[:message] = "Dribbble authentication was unsuccessful."
+      current_user ? render :show : render :new
+      return
+    end
+
+    # if there's been data found, create or append user info
+    data = params[:user_data]
+    if current_user # append to user model
+      @user = current_user
+      @user.update_attributes(img: data[:avatar_url], bio: data[:bio], dribbble: true, dribbble_uid: data[:id], dribbble_url: data[:html_url], role: "designer", first_name: data[:name].split[0], last_name: data[:name].split[1])
+      if @user.save
+        render :show
+      end
+
+    else # user is not signed in, or user is not registered
+      @user = User.find_by(dribbble_uid: data[:id])
+      if @user
+        session[:user_id] = @user.id
+        render 'show'
+      else
+        @user = User.new(img: data[:avatar_url], bio: data[:bio], dribbble: true, dribbble_uid: data[:id], dribbble_url: data[:projects_url], role: "designer", first_name: data[:name].split[0], last_name: data[:name].split[1])
+        render 'omniauth/choose_email_password'
+      end
+    end
+  end
+end
+```
+
+<hr>
+
+## Program flow
 1. User clicks your link: `[your root app]/dribbble/request`.
 2. User is served this page:
 
